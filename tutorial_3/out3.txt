@@ -1,0 +1,6 @@
+TD1: average: 5.17 min: 2.0 max: 7.5
+TD2: average: 5.83 min: 5.5 max: 6.0
+TD3: average: 6.5 min: 2.5 max: 9.0
+TD4: average: 5.03 min: 3.6 max: 6.5
+TD5: average: 4.5 min: 3.0 max: 5.5
+TD6: average: 7.67 min: 7.0 max: 8.0

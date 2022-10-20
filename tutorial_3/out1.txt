@@ -1,0 +1,4 @@
+gleb.pogudin 8.0 8.0 sum: 16.0
+uli.fahrenberg 6.5 7.0 sum: 13.5
+stefan.mengel 9.0 8.0 sum: 17.0
+total average: 15.5
