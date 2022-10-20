@@ -1,0 +1,11 @@
+ROW #.#.#
+ROW .....
+ROW #.#.#
+ROW #.#..
+ROW ...#.
+CLUE (0,1) down: Of or pertaining to the voice (5)
+CLUE (0,3) down: Nocturnal winged mammals (4)
+CLUE (1,0) across: Colourful underwater structure formed by colonies of organisms (5)
+CLUE (3,3) across: Thus (2)
+CLUE (3,4) down: Not off (2)
+CLUE (4,0) across: Every (3)
