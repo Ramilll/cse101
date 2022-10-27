@@ -1,0 +1,10 @@
+milk,800
+egg,8
+cornstarch,50
+salt,10
+butter,175
+sugar,250
+vanilla,20
+wheat flour,350
+yeast,1
+almond,20
