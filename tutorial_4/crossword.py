@@ -9,8 +9,8 @@ def split_type(line):
 
     """
     line = line.strip()
-    index = line.find(' ')
-    return (line[:index].strip(), line[index+1:].strip())
+    index = line.find(" ")
+    return (line[:index].strip(), line[index + 1 :].strip())
 
 
 def read_row(row):
@@ -47,7 +47,7 @@ def coord_to_int(coordstring):
     """
     coordstring = coordstring.strip()
     coordstring = coordstring[1:-1]
-    x, y = coordstring.split(',')
+    x, y = coordstring.split(",")
     return (int(x), int(y))
 
 
@@ -64,10 +64,10 @@ def read_clue(cluestring):
         ((0, 1), 'down', 5, 'Of or pertaining to the voice')
     """
     cluestring = cluestring.strip()
-    coordstring_direction, rest = cluestring.split(':')
+    coordstring_direction, rest = cluestring.split(":")
     coordstring, direction = coordstring_direction.split()
     coords = coord_to_int(coordstring)
-    question, length = rest.split('(')
+    question, length = rest.split("(")
     length = length[:-1]
     return (coords, direction, int(length), question.strip())
 
@@ -94,8 +94,9 @@ def read_file(filename):
                 raise ValueError("Unknown type: " + type)
     return (grid, clues)
 
+
 def create_clue_string(clue):
-    """ Given a clue, which is a tuple
+    """Given a clue, which is a tuple
     (position, direction, length, question),
     create a string in the form 'position direction: question (length)'.
     For example, given the clue
@@ -107,25 +108,27 @@ def create_clue_string(clue):
     x, y = coord_to_int(str(position))
     return f"({x},{y}) {direction}: {question} ({length})"
 
+
 def create_grid_string(grid):
     """Return a crossword grid as a string."""
     size = len(grid)
-    separator = '  +' + ('-----+')*size
-    column_number_line = '   '
-    column_number_line += ''.join(f' {j:2}   ' for j in range(size))
-    result = f'{column_number_line}\n{separator}\n'
+    separator = "  +" + ("-----+") * size
+    column_number_line = "   "
+    column_number_line += "".join(f" {j:2}   " for j in range(size))
+    result = f"{column_number_line}\n{separator}\n"
     for (i, row) in enumerate(grid):
-        fill = '  |'
-        centre_line = f'{i:2}|'
+        fill = "  |"
+        centre_line = f"{i:2}|"
         for entry in row:
-            if entry == '#':
-                fill += '#####|'
-                centre_line += '#####|'
+            if entry == "#":
+                fill += "#####|"
+                centre_line += "#####|"
             else:
-                fill += '     |'
-                centre_line += f'  {entry}  |'
-        result += f'{fill}\n{centre_line}\n{fill}\n{separator}\n'
+                fill += "     |"
+                centre_line += f"  {entry}  |"
+        result += f"{fill}\n{centre_line}\n{fill}\n{separator}\n"
     return result
+
 
 def create_puzzle_string(grid, clues):
     """Return a human readable string representation of the puzzle."""
@@ -134,6 +137,7 @@ def create_puzzle_string(grid, clues):
     for clue in clues:
         result += create_clue_string(clue) + "\n"
     return result.rstrip()
+
 
 def fill_in_word(grid, word, position, direction):
     """Create and return a new grid (a list of lists) based on the grid
@@ -144,24 +148,25 @@ def fill_in_word(grid, word, position, direction):
     *This function may modify its grid argument!*
     """
     x, y = position
-    if direction == 'down':
+    if direction == "down":
         for i, letter in enumerate(word):
-            grid[x+i][y] = letter
-    elif direction == 'across':
+            grid[x + i][y] = letter
+    elif direction == "across":
         for i, letter in enumerate(word):
-            grid[x][y+i] = letter
+            grid[x][y + i] = letter
     return grid
+
 
 def create_row_string(row):
     """Returns a row representation of a string.
     Example:
         create_row_string(['#', 'A', ' ']) returns '#A.'
     """
-    return ''.join(letter if letter != ' ' else '.' for letter in row)
+    return "".join(letter if letter != " " else "." for letter in row)
+
 
 def compare_two_files(filename1, filename2):
-    """Return True if the two files are identical, False otherwise.
-    """
+    """Return True if the two files are identical, False otherwise."""
     with open(filename1) as f1, open(filename2) as f2:
         for line1, line2 in zip(f1, f2):
             if line1 != line2:
@@ -169,11 +174,12 @@ def compare_two_files(filename1, filename2):
                 return False
     return True
 
+
 def write_puzzle(filename, grid, clues):
     """Writes the puzzle given by the grid and by the clues to the specified
     file.
     """
-    with open(filename, 'w') as f:
+    with open(filename, "w") as f:
         for row in grid:
             f.write(f"ROW {create_row_string(row)}\n")
         for clue in clues:

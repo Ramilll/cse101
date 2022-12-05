@@ -1,16 +1,18 @@
-from doctest import FAIL_FAST
 import random
+from doctest import FAIL_FAST
 
-COLORS = ['RED', 'GREEN', 'BLUE', 'PURPLE', 'BROWN', 'YELLOW']
+COLORS = ["RED", "GREEN", "BLUE", "PURPLE", "BROWN", "YELLOW"]
+
 
 def input_color(color):
     """Return True if the given input color can be found in COLORS
-       Use a for-loop to iterate over the list of COLORS.
+    Use a for-loop to iterate over the list of COLORS.
     """
     for i in range(6):
         if color == COLORS[i]:
             return True
     return False
+
 
 def create_code():
     """Return 4-element list of strings randomly chosen from
@@ -20,6 +22,7 @@ def create_code():
     for i in range(4):
         code.append(random.choice(COLORS))
     return code
+
 
 def black_pins(guess, code):
     """guess, code: 4-element lists of strings from COLORS
@@ -32,9 +35,9 @@ def black_pins(guess, code):
             black += 1
     return black
 
+
 def create_a_count_dictionary_from_a_list(arr):
-    """Return a dictionary with the count of each element in the list
-    """
+    """Return a dictionary with the count of each element in the list"""
     cnt_by_value = {}
     for color in arr:
         if color in cnt_by_value:
@@ -43,14 +46,15 @@ def create_a_count_dictionary_from_a_list(arr):
             cnt_by_value[color] = 1
     return cnt_by_value
 
+
 def count_minimum_number_of_occurences_in_both_dicts(l_dict, r_dict):
-    """Return the minimum number of occurences of a color in both dictionaries
-    """
+    """Return the minimum number of occurences of a color in both dictionaries"""
     min_count = 0
     for color in l_dict:
         if color in r_dict:
             min_count += min(l_dict[color], r_dict[color])
     return min_count
+
 
 def score_guess(guess, code):
     """guess, code: 4-element lists of strings
@@ -65,8 +69,9 @@ def score_guess(guess, code):
     white = pins - black
     return (black, white)
 
+
 def str_with_suffix(n) -> str:
-    """Convert the integer n to a string expressing the corresponding 
+    """Convert the integer n to a string expressing the corresponding
     position in an ordered sequence.
     Eg. 1 becomes '1st', 2 becomes '2nd', etc.
     """
@@ -79,9 +84,9 @@ def str_with_suffix(n) -> str:
     else:
         return str(n) + "th"
 
+
 def input_guess():
-    """Input four colors from COLORS and return as list.
-    """
+    """Input four colors from COLORS and return as list."""
     user_colors = []
     print("Enter your guess:")
 
@@ -94,7 +99,8 @@ def input_guess():
         else:
             print("Please input a color from the list ['RED', 'GREEN', 'BLUE', 'PURPLE', 'BROWN', 'YELLOW']")
     return user_colors
-        
+
+
 def one_round(code):
     """Input guess, score guess, print result, and return True iff
     user has won.
@@ -107,9 +113,9 @@ def one_round(code):
         return True
     return False
 
+
 def play_mastermind(code):
-    """Let user guess the code in rounds, use a while-loop
-	"""
+    """Let user guess the code in rounds, use a while-loop"""
     won = False
     cnt_round = 0
     while not won:
