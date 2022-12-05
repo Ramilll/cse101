@@ -1,5 +1,6 @@
-from collections import deque
 import random
+from collections import deque
+
 
 class Card:
     """French playing cards.
@@ -12,9 +13,22 @@ class Card:
     suit, rank -- the Card's suit and rank, as indices into the lists above
     """
 
-    suit_names = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
-    rank_names = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight',
-             'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace']
+    suit_names = ["Clubs", "Diamonds", "Hearts", "Spades"]
+    rank_names = [
+        "Two",
+        "Three",
+        "Four",
+        "Five",
+        "Six",
+        "Seven",
+        "Eight",
+        "Nine",
+        "Ten",
+        "Jack",
+        "Queen",
+        "King",
+        "Ace",
+    ]
 
     def __init__(self, suit, rank):
         # assert 0 <= suit < 4, "suit must be between 0 and 3"
@@ -24,7 +38,7 @@ class Card:
 
     def __str__(self):
         return f"{Card.rank_names[self.rank]} of {Card.suit_names[self.suit]}"
-    
+
     def __eq__(self, other):
         return self.rank == other.rank and self.suit == other.suit
 
@@ -35,7 +49,8 @@ class Card:
             return self.suit > other.suit
         else:
             return False
-    
+
+
 class Deck:
     """A deck of Cards.
 
@@ -54,7 +69,7 @@ class Deck:
         res = []
         for card in self.cards:
             res.append(str(card))
-        return ', '.join(res)
+        return ", ".join(res)
 
     def pop(self):
         """Remove and return last card from deck."""
@@ -74,7 +89,7 @@ class Deck:
     def number_of_cards(self):
         """Return the number of cards in the deck."""
         return len(self.cards)
-    
+
     def shuffle(self):
         """Shuffle the deck."""
         random.shuffle(self.cards)
@@ -82,7 +97,8 @@ class Deck:
     def is_empty(self):
         """Return True if the deck is empty."""
         return self.number_of_cards() == 0
-    
+
+
 class Player:
     """A player of the card game.
 
@@ -113,6 +129,7 @@ class Player:
         """Remove the first card from this player's hand and return it."""
         return self.hand.popleft()
 
+
 class CardGame:
     """A class for playing card games.
 
@@ -134,7 +151,7 @@ class CardGame:
         res = []
         for player in self.players:
             res.append(str(player))
-        return '\n'.join(res)
+        return "\n".join(res)
 
     def burn_card(self, card):
         """Remove the card 'card' from this game's deck if it exists,
@@ -142,7 +159,7 @@ class CardGame:
         if card in self.deck.cards:
             self.deck.cards.remove(card)
             self.numcards -= 1
-    
+
     def shuffle_deck(self):
         """Shuffle this game's deck."""
         self.deck.shuffle()

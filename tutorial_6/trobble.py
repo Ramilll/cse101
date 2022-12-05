@@ -8,7 +8,7 @@ class Trobble:
     health -- an integer between 0 (dead) and 10 (full health) inclusive
     hunger -- a non-negative integer (0 is not hungry)
     """
-    
+
     def __init__(self, name, sex) -> None:
         self.name = name
         self.sex = sex
@@ -37,15 +37,14 @@ class Trobble:
         with a minimum value of 0.
         """
         self.hunger = max(0, self.hunger - food_value)
-    
+
     def cure(self, cure_value=5):
-        """Increase the health of the instance by 5 up to the maximum of 10.
-        """
+        """Increase the health of the instance by 5 up to the maximum of 10."""
         self.health = min(10, self.health + cure_value)
-    
+
     def party(self):
-        """Increase the health of the instance by 2 up to the maximum of 10 
-	    and increase the hunger by 4.
+        """Increase the health of the instance by 2 up to the maximum of 10
+        and increase the hunger by 4.
         """
         self.health = min(10, self.health + 2)
         self.hunger += 4
@@ -63,47 +62,50 @@ class Trobble:
         return self.age % 10 == 0 and self.age > 0
 
     def congratulate_with_the_birtday(self, food_value=5):
-        """Print a congratulation message for the birthday.
-        """
+        """Print a congratulation message for the birthday."""
         print(f"Happy Birthday {self.name}!")
         self.feed(food_value)
 
+
 # Playing with Trobbles
 
+
 def get_name():
-    return input('Please give your new Trobble a name: ')
+    return input("Please give your new Trobble a name: ")
+
 
 def get_sex():
     sex = None
     while sex is None:
         prompt = 'Is your new Trobble male or female? Type "m" or "f" to choose: '
         choice = input(prompt)
-        if choice == 'm':
-            sex = 'male'
-        elif choice == 'f':
-            sex = 'female'
+        if choice == "m":
+            sex = "male"
+        elif choice == "f":
+            sex = "female"
     return sex
+
 
 def get_action(actions):
     while True:
         prompt = f"Type one of {', '.join(actions.keys())} to perform the action: "
         action_string = input(prompt)
         if action_string not in actions:
-            print('Unknown action!')
+            print("Unknown action!")
         else:
             return actions[action_string]
-        
+
+
 def play():
     name = get_name()
     sex = get_sex()
     trobble = Trobble(name, sex)
-    actions = {'feed': trobble.feed, 'cure': trobble.cure, 'party': trobble.party}
+    actions = {"feed": trobble.feed, "cure": trobble.cure, "party": trobble.party}
     while trobble.is_alive():
         if trobble.is_birthday():
             trobble.congratulate_with_the_birtday()
-        print('You have one Trobble named ' + str(trobble))
+        print("You have one Trobble named " + str(trobble))
         action = get_action(actions)
         action()
         trobble.next_turn()
-    print(f'Unfortunately, your Trobble {trobble.name} has died at the age of {trobble.age}')
-
+    print(f"Unfortunately, your Trobble {trobble.name} has died at the age of {trobble.age}")

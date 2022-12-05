@@ -1,6 +1,6 @@
 from collections import defaultdict
 from sys import stdout
-from typing import List, Dict, Tuple, Union
+from typing import Dict, List, Tuple, Union
 
 
 def print_recipe(recipe) -> None:
@@ -9,6 +9,7 @@ def print_recipe(recipe) -> None:
     """
     for ingredient, amount in recipe.items():
         print(f"{ingredient}: {amount}")
+
 
 def read_recipe(recipe_file_name) -> Dict[str, int]:
     """Read recipe file 'recipe_file_name', and return ingredients as a
@@ -25,11 +26,13 @@ def read_recipe(recipe_file_name) -> Dict[str, int]:
             recipe[ingredient.strip()] = int(amount.strip())
     return recipe
 
+
 def write_recipe(recipe, recipe_file_name) -> None:
     """Write recipe to a file named recipe_file_name."""
     with open(recipe_file_name, "w") as recipe_file:
         for ingredient, amount in recipe.items():
             recipe_file.write(f"{ingredient},{amount}\n")
+
 
 def read_fridge(fridge_file_name) -> Dict[str, int]:
     """Read fridge file 'fridge_file_name', and return the ingredients
@@ -46,6 +49,7 @@ def read_fridge(fridge_file_name) -> Dict[str, int]:
             fridge[ingredient] += amount
     return dict(fridge)
 
+
 def is_cookable(recipe_file_name, fridge_file_name) -> bool:
     """Return True if the contents of the fridge named fridge_file_name
     are sufficient to cook the recipe named recipe_file_name.
@@ -57,6 +61,7 @@ def is_cookable(recipe_file_name, fridge_file_name) -> bool:
             return False
     return True
 
+
 def add_recipes(recipes) -> Dict[str, int]:
     """Return a dictionary representing the sum of all of
     the recipe dictionaries in recipes.
@@ -66,6 +71,7 @@ def add_recipes(recipes) -> Dict[str, int]:
         for ingredient, amount in recipe.items():
             total[ingredient] += amount
     return dict(total)
+
 
 def create_shopping_list(recipe_file_names, fridge_file_name) -> Dict[str, int]:
     """Return the shopping list (a dictionary of ingredients and
@@ -81,6 +87,7 @@ def create_shopping_list(recipe_file_names, fridge_file_name) -> Dict[str, int]:
         shopping_list[ingredient] += amount - fridge.get(ingredient, 0)
     return {product: amount for product, amount in shopping_list.items() if amount > 0}
 
+
 def read_market(market_filename) -> Dict[str, int]:
     """Return a dictionary mapping ingredients to their prices in
     millicents.
@@ -95,6 +102,7 @@ def read_market(market_filename) -> Dict[str, int]:
             market[ingredient.strip()] = int(price.strip())
     return market
 
+
 def total_price(shopping_list, market_file_name) -> int:
     """Return the total price in millicents of the given shopping_list
     at the market named market_file_name.
@@ -104,6 +112,7 @@ def total_price(shopping_list, market_file_name) -> int:
     for ingredient, amount in shopping_list.items():
         total += amount * market[ingredient]
     return total
+
 
 def find_cheapest(shopping_list, market_file_names) -> Union[Tuple[str, int], None]:
     """Return the name of the market in market_file_names
@@ -116,6 +125,7 @@ def find_cheapest(shopping_list, market_file_names) -> Union[Tuple[str, int], No
         if cheapest is None or price < cheapest[1]:
             cheapest = (str(market_file_name), price)
     return cheapest
+
 
 def update_fridge(fridge_file_name, recipe_file_names, market_file_names, new_fridge_file_name) -> None:
     """Compute the shopping list for the given recipes after the
